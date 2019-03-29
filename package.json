@@ -1,0 +1,45 @@
+{
+  "name": "react-scale-image",
+  "version": "0.0.0",
+  "description": "A React component that scales and fits an image dynamically based on browser screen width",
+  "main": "lib/react-scale-image.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack --env.prod --config webpack.config.js",
+    "start": "./node_modules/.bin/webpack-dev-server --env.dev --config webpack.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahrjarrett/react-scale-image.git"
+  },
+  "keywords": [
+    "react",
+    "image",
+    "crop",
+    "scale",
+    "innerWidth",
+    "outerWidth"
+  ],
+  "author": "Andrew Jarrett <ahrjarrett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahrjarrett/react-scale-image/issues"
+  },
+  "homepage": "https://github.com/ahrjarrett/react-scale-image#readme",
+  "dependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "styled-components": "4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.0",
+    "@babel/plugin-transform-runtime": "7.4.0",
+    "@babel/preset-env": "7.4.2",
+    "@babel/preset-react": "7.0.0",
+    "@babel/runtime": "7.4.2",
+    "babel-loader": "8.0.5",
+    "html-webpack-plugin": "3.2.0",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0",
+    "webpack-dev-server": "3.2.1"
+  }
+}
