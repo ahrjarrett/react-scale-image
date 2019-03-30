@@ -3,60 +3,54 @@
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 03/27/2019
 
-~ScaleImage~ is a stupid simple component that scales and crops an image in ways that you'd expect, despite the browser width changing.
+~ScaleImage~ is a stupid simple component that _scales_ and _crops_ your images in ways that you'd expect, despite the browser width changing.
 
 [[/example/images/480-demo-1.gif]]
 
-![](/example/images/480-demo.gif)
+I finally got around to publishing this npm package because I got sick of rewriting this damn component every time I take on a frontend project. It works best when the images are fluid width, and are designed by default to take up 100% of the width of their parent element (which you control).
 
-This is an npm package that I finally got around to publishing because I'm sick of rewriting this component every time I need to do frontend work, plus it was a chance to learn React hooks better.
+** What dis?
 
-** API
+=react-scale-image= exports 2 components: ~ScaleImage~ and ~ClientInnerWidth~. Together they create a scope that dynamically updates the width, height and cropping of its children image components based on how you configured each of them.
 
-=react-scale-image= is the ~ScaleImage~ and ~ClientInnerWidth~ components. They pair well together, like so:
+
+** Quick start
 
 #+BEGIN_SRC jsx
 import { ClientInnerWidth, ScaleImage } from "react-scale-image"
 
-// ...
-render() {
-  return (
-    <ClientInnerWidth>
-      {({ width }) => (
-        <div className="example">
-          <ScaleImg
-            url="/example/images/cauliflour.jpg"
-            clientWidth={width}
-            aspect={0.75}
-          />
-          <ScaleImg
-            url="/example/images/citrus-stoplight.jpg"
-            clientWidth={width}
-            aspect={0.5}
-          />
-        </div>
-      )}
-    </ClientInnerWidth>
-  )
-}
+const FancyComponent = () => (
+  <ClientInnerWidth>
+    {({ width }) => (
+      <>
+        <ScaleImg url="/cauliflour.jpg" clientWidth={width} aspect={0.5} />
+        <ScaleImg url="/asparagus.jpg" clientWidth={width} aspect={0.75} />
+      </>
+    )}
+  </ClientInnerWidth>
+)
 #+END_SRC
+
+** API
 
 The ~ScaleImage~ component accepts the following props:
 
-- ~url~ *<Required>* : URL that resolves to your image (uses ~background-image: url(...)~ under the hood)
-- ~clientWidth~ *<Required>* : Usually you'll just pass the value from ~ClientInnerWidth~, unless you want more control over what the image will scale in proportion to (for example, an image that takes up 50% of its parent, which itself takes up 50% of the screen)
-- ~aspect~ *Default Value: 1.5* : The aspect ratio, width over height, of /the cropping you want/ (not the dimensions of the raw image)
-- ~bgPosition~ *Default Value: `center`* : Where you want the image to be positioned in relation to the cropping, for example "left" means the left side of the image will be flush with the crop area's left border
-- ~fixHeight~ : Override / escape hatch for when you want the image height to remain static, while still adjusting its scaling / positioning as the state of the client width changes
+
+| Prop          | Signature         | Outcome                                                                                          |
+|---------------+-------------------+--------------------------------------------------------------------------------------------------|
+| ~url~         | *<Required>*      | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
+| ~clientWidth~ | *<Required>*      | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
+| ~aspect~      | Default: ~1.5~    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
+| ~bgPosition~  | Default: ~center~ | Where you want your image's point of origin to be as it scales                                   |
+| ~fixHeight~   | Default: ~null~   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
+
 
   
-** Example
+** Examples & Developing
 
-Try it before you buy it.
+Try it before you buy it. To run in development just clone this repository and install dependencies with =npm=, =yarn=, or whatever the kids are using these days.
 
-To run the example, clone this repository and install dependencies with =npm=, =yarn=, or whatever the kids are using these days.
-
-=npm run start= kicks off webpack-dev-server in a dev environment with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
+=npm run start= kicks off webpack-dev-server with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
 
 *** Easy image columns
 
@@ -88,7 +82,17 @@ That's it. Don't override give ~ScaleImage~ reasonable props (or even unreasonab
 
 
 
-*** How it works
+
+*** Advanced Usage
+
+`[Work in progress]`
+
+*tldr;* The idea behind this library is that we should give images more contextual awareness. The browser's dimensions are a simple place to start, but this library was designed to work with any ~clientWidth~, for any DOM node, not just the "client" (browser) itself. When you pass ~ScaleImage~ an ancestor or descendant node, it evaluates itself from inside the bounds of that node's width and context.
+
+A more thoughtful implementation would be essentially recursive. Maybe some day the trick to creating a layout won't be hacking away at pixels, but identifying the base case that will generate the right layout for the job.
+
+
+
 
 
 
