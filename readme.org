@@ -3,11 +3,11 @@
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 03/27/2019
 
-~ScaleImage~ is a stupid simple component that _scales_ and _crops_ your images in ways that you'd expect, despite the browser width changing.
+~ScaleImage~ is a stupid simple component that _scales_ and _crops_ your images in ways that you'd expect, even when the browser changes.
 
 [[/example/images/480-demo-1.gif]]
 
-I finally got around to publishing this npm package because I got sick of rewriting this damn component every time I take on a frontend project. It works best when the images are fluid width, and are designed by default to take up 100% of the width of their parent element (which you control).
+I finally got around to publishing this because I got sick of rewriting this damn component every time I take on a frontend project. It works best when the images are fluid width, and are designed by default to take up 100% of the width of their parent element (which you control).
 
 ** What dis?
 
@@ -36,13 +36,13 @@ const FancyComponent = () => (
 The ~ScaleImage~ component accepts the following props:
 
 
-| Prop          | Signature         | Outcome                                                                                          |
-|---------------+-------------------+--------------------------------------------------------------------------------------------------|
-| ~url~         | *<Required>*      | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
-| ~clientWidth~ | *<Required>*      | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
-| ~aspect~      | Default: ~1.5~    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
-| ~bgPosition~  | Default: ~center~ | Where you want your image's point of origin to be as it scales                                   |
-| ~fixHeight~   | Default: ~null~   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
+| Prop        | Signature           | Outcome                                                                                          |
+|-------------+---------------------+--------------------------------------------------------------------------------------------------|
+| url         | *Required*          | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
+| clientWidth | *Required*          | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
+| aspect      | /Default:/ ~1.5~    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
+| bgPosition  | /Default:/ ~center~ | Where you want your image's point of origin to be as it scales                                   |
+| fixHeight   | /Default:/ ~null~   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
 
 
   
