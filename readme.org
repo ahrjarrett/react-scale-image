@@ -56,7 +56,7 @@ To run the example, clone this repository and install dependencies with =npm=, =
 
 =npm run start= kicks off webpack-dev-server in a dev environment with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
 
-![](/example/images/480-demo-2.gif)
+[[/example/images/480-demo-2.gif]]
 
 *** Easy image columns
 
