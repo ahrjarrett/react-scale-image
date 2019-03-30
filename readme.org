@@ -58,7 +58,7 @@ I've been asked how to make image columns like in the demo before; this package 
 
 Just wrap a bunch of `ScaleImage` components in a parent div, configure how you want your images to scale and be cropped, then apply these styles to the wrapper (parent) element:
 
-```css
+#+BEGIN_SRC css
   @media (min-width: 400px) {
     .col-3 {
       column-count: 2;
@@ -76,7 +76,7 @@ Just wrap a bunch of `ScaleImage` components in a parent div, configure how you 
     display: inline-block;
     margin-bottom: 1.25rem;
   }
-```
+#+END_SRC
 
 That's it. Don't override give ~ScaleImage~ reasonable props (or even unreasonable ones), and unless you have styles from elsewhere on the pace overriding or interfering, they should line themselves right up like in the demo video, with no extra configuration.
 
