@@ -1,0 +1,87 @@
+# React Scale Image
+
+`ScaleImage` is a stupid simple component that scales and crops your images in ways that you’d expect, even when the browser changes.
+
+![](/example/images/480-demo-1.gif)
+
+I finally got around to publishing this because I got sick of rewriting this damn component every time I take on a frontend project. It works best when the images are fluid width, and are designed by default to take up 100% of the width of their parent element (which you control).
+
+## What dis?
+
+`react-scale-image` exports 2 components: `ScaleImage` and `ClientInnerWidth`. Together they create a scope that dynamically updates the width, height and cropping of its children image components based on how you configured each of them.
+
+## Quick start
+
+```jsx
+import { ClientInnerWidth, ScaleImage } from "react-scale-image"
+
+const FancyComponent = () => (
+  <ClientInnerWidth>
+    {({ width }) => (
+      <>
+        <ScaleImg url="/cauliflour.jpg" clientWidth={width} aspect={0.5} />
+        <ScaleImg url="/asparagus.jpg" clientWidth={width} aspect={0.75} />
+      </>
+    )}
+  </ClientInnerWidth>
+)
+```
+
+## API
+
+| Prop        | Signature           | Outcome                                                                                          |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| url         | *Required*          | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
+| clientWidth | *Required*          | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
+| aspect      | /Default:/ ~1.5~    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
+| bgPosition  | /Default:/ ~center~ | Where you want your image's point of origin to be as it scales                                   |
+| fixHeight   | /Default:/ ~null~   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
+
+
+## Examples & Developing
+
+Try it before you buy it. To run in development just clone this repository and install dependencies with `npm`, `yarn`, or whatever the kids are using these days.
+
+`npm run start` kicks off `webpack-dev-server` with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
+
+
+### Easy image columns
+
+I’ve been asked how to make image columns like in the demo before; this package was designed to make it easy.
+
+Just wrap a bunch of `ScaleImage` components in a parent div, configure how you want your images to scale and be cropped, then apply these styles to the wrapper (parent) element:
+
+``` css
+@media (min-width: 400px) {
+  .col-3 {
+    column-count: 2;
+    column-gap: 1.25rem;
+  }
+}
+@media (min-width: 750px) {
+  .col-3 {
+    column-count: 3;
+  }
+}
+.col-3 > div {
+  width: 100%;
+  break-inside: avoid;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+```
+
+That’s it. No need for a bunch of overrides, just give `ScaleImage` some reasonable props (or even some unreasonable ones), and unless you have styles from elsewhere on the pace overriding or interfering, they should line themselves right up like in the demo video, with no extra configuration.
+
+### Advanced Usage
+
+`[Work in progress]`
+
+**tldr;** The idea behind this library is that we can give images more contextual awareness for informing how they render.
+
+The browser’s dimensions are a good starting point, but this library was designed to work with the `clientWidth` of any DOM node, not just the “client” (browser) itself (as long as it’s a direct ancestor/descendent of the componenet). When you do that, `ScaleImage` evaluates itself from inside the bounds of its target node, essentially shadowing the browser window.
+
+A more thoughtful approach might have been to approach the problem recursively from the start. Maybe some day the trick to creating a layout won’t be hacking at pixels, but identifying the base case that will generate a layout for us.
+
+
+
