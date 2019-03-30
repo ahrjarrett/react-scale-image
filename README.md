@@ -29,13 +29,13 @@ const FancyComponent = () => (
 
 ## API
 
-| Prop        | Signature           | Outcome                                                                                          |
-| ----------- | ------------------- | ------------------------------------------------------------------------------------------------ |
-| url         | *Required*          | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
-| clientWidth | *Required*          | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
-| aspect      | /Default:/ ~1.5~    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
-| bgPosition  | /Default:/ ~center~ | Where you want your image's point of origin to be as it scales                                   |
-| fixHeight   | /Default:/ ~null~   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
+| Prop        | Signature            | Outcome                                                                                          |
+| ----------- | -------------------  | ------------------------------------------------------------------------------------------------ |
+| url         | *Required!*          | URL that resolves to your image (uses ~background-image: url(...)~ under the hood)               |
+| clientWidth | *Required!*          | Pass the value rendered by ~ClientInnerWidth~ (unless you're creating a localized width context) |
+| aspect      | *Default = `1.5`*    | Aspect ratio, W / H, of the _cropping you want_ (not the raw image's dimensions)                 |
+| bgPosition  | *Default = `center`* | Where you want your image's point of origin to be as it scales                                   |
+| fixHeight   | *Default = `null`*   | Override for when you want the image height to remain static, i.e. *not* scale with the window   |
 
 
 ## Examples & Developing
