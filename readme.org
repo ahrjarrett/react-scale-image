@@ -5,6 +5,8 @@
 
 ~ScaleImage~ is a stupid simple component that scales and crops an image in ways that you'd expect, despite the browser width changing.
 
+[[/example/images/480-demo-1.gif]]
+
 ![](/example/images/480-demo.gif)
 
 This is an npm package that I finally got around to publishing because I'm sick of rewriting this component every time I need to do frontend work, plus it was a chance to learn React hooks better.
@@ -47,7 +49,7 @@ The ~ScaleImage~ component accepts the following props:
 - ~bgPosition~ *Default Value: `center`* : Where you want the image to be positioned in relation to the cropping, for example "left" means the left side of the image will be flush with the crop area's left border
 - ~fixHeight~ : Override / escape hatch for when you want the image height to remain static, while still adjusting its scaling / positioning as the state of the client width changes
 
-
+  
 ** Example
 
 Try it before you buy it.
@@ -55,8 +57,6 @@ Try it before you buy it.
 To run the example, clone this repository and install dependencies with =npm=, =yarn=, or whatever the kids are using these days.
 
 =npm run start= kicks off webpack-dev-server in a dev environment with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
-
-[[/example/images/480-demo-2.gif]]
 
 *** Easy image columns
 
