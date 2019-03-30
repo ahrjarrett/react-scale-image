@@ -85,11 +85,14 @@ That's it. Don't override give ~ScaleImage~ reasonable props (or even unreasonab
 
 *** Advanced Usage
 
-`[Work in progress]`
+~[Work in progress]~
 
-*tldr;* The idea behind this library is that we should give images more contextual awareness. The browser's dimensions are a simple place to start, but this library was designed to work with any ~clientWidth~, for any DOM node, not just the "client" (browser) itself. When you pass ~ScaleImage~ an ancestor or descendant node, it evaluates itself from inside the bounds of that node's width and context.
+*tldr;* The idea behind this library is that we can give images more contextual awareness for informing how they render.
 
-A more thoughtful implementation would be essentially recursive. Maybe some day the trick to creating a layout won't be hacking away at pixels, but identifying the base case that will generate the right layout for the job.
+The browser's dimensions are a good starting point, but this library was designed to work with the ~clientWidth~ of any DOM node, not just the "client" (browser) itself (as long as it's a direct ancestor/descendent of the componenet). When you do that, ~ScaleImage~ evaluates itself from inside the bounds of its target node, essentially shadowing the browser window.
+
+A more thoughtful approach might have been to approach the problem recursively from the start. Maybe some day the trick to creating a layout won't be hacking at pixels, but identifying the base case that will generate a layout for us.
+
 
 
 
