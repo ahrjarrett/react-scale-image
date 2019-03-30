@@ -1,0 +1,94 @@
+#+TITLE: React Scale Image
+#+AUTHOR: Andrew Jarrett
+#+EMAIL:ahrjarrett@gmail.com
+#+DATE: 03/27/2019
+
+~ScaleImage~ is a stupid simple component that scales and crops an image in ways that you'd expect, despite the browser width changing.
+
+![](/example/images/480-demo.gif)
+
+This is an npm package that I finally got around to publishing because I'm sick of rewriting this component every time I need to do frontend work, plus it was a chance to learn React hooks better.
+
+** API
+
+=react-scale-image= is the ~ScaleImage~ and ~ClientInnerWidth~ components. They pair well together, like so:
+
+#+BEGIN_SRC jsx
+import { ClientInnerWidth, ScaleImage } from "react-scale-image"
+
+// ...
+render() {
+  return (
+    <ClientInnerWidth>
+      {({ width }) => (
+        <div className="example">
+          <ScaleImg
+            url="/example/images/cauliflour.jpg"
+            clientWidth={width}
+            aspect={0.75}
+          />
+          <ScaleImg
+            url="/example/images/citrus-stoplight.jpg"
+            clientWidth={width}
+            aspect={0.5}
+          />
+        </div>
+      )}
+    </ClientInnerWidth>
+  )
+}
+#+END_SRC
+
+The ~ScaleImage~ component accepts the following props:
+
+- ~url~ *<Required>* : URL that resolves to your image (uses ~background-image: url(...)~ under the hood)
+- ~clientWidth~ *<Required>* : Usually you'll just pass the value from ~ClientInnerWidth~, unless you want more control over what the image will scale in proportion to (for example, an image that takes up 50% of its parent, which itself takes up 50% of the screen)
+- ~aspect~ *Default Value: 1.5* : The aspect ratio, width over height, of /the cropping you want/ (not the dimensions of the raw image)
+- ~bgPosition~ *Default Value: `center`* : Where you want the image to be positioned in relation to the cropping, for example "left" means the left side of the image will be flush with the crop area's left border
+- ~fixHeight~ : Override / escape hatch for when you want the image height to remain static, while still adjusting its scaling / positioning as the state of the client width changes
+
+
+** Example
+
+Try it before you buy it.
+
+To run the example, clone this repository and install dependencies with =npm=, =yarn=, or whatever the kids are using these days.
+
+=npm run start= kicks off webpack-dev-server in a dev environment with hot module reloading, so you get a playground of sorts. These dependencies do not ship with the minified production package.
+
+![](/example/images/480-demo-2.gif)
+
+*** Easy image columns
+
+I've been asked how to make image columns like in the demo before; this package was designed to make it easy.
+
+Just wrap a bunch of `ScaleImage` components in a parent div, configure how you want your images to scale and be cropped, then apply these styles to the wrapper (parent) element:
+
+```css
+  @media (min-width: 400px) {
+    .col-3 {
+      column-count: 2;
+      column-gap: 1.25rem;
+    }
+  }
+  @media (min-width: 750px) {
+    .col-3 {
+      column-count: 3;
+    }
+  }
+  .col-3 > div {
+    width: 100%;
+    break-inside: avoid;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+```
+
+That's it. Don't override give ~ScaleImage~ reasonable props (or even unreasonable ones), and unless you have styles from elsewhere on the pace overriding or interfering, they should line themselves right up like in the demo video, with no extra configuration.
+
+
+
+*** How it works
+
+
+

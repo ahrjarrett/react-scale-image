@@ -4,8 +4,6 @@ const { resolve } = require('path')
 
 module.exports = env => {
   const baseConfig = {
-    entry: './src/index.js',
-
     // context: resolve(__dirname, 'src'),
     devtool: 'source-map',
     target: 'web',
@@ -29,6 +27,8 @@ module.exports = env => {
   if (env.dev) {
     return {
       ...baseConfig,
+      entry: './src/Example.js',
+
       mode: 'development',
       output: {
         filename: 'bundle.js',
@@ -52,6 +52,7 @@ module.exports = env => {
   if (env.prod) {
     return {
       ...baseConfig,
+      entry: './src/index.js',
       mode: 'production',
       output: {
         path: resolve(__dirname, 'lib'),
